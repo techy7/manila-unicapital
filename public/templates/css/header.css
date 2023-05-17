@@ -1,0 +1,17 @@
+@charset "UTF-8";
+
+.horizontal-app-menu .menu-bar ul li .sub-menu {
+    left: 70%;
+}
+
+.widget-customers::after {
+    background-image: url("../images/customers.png");
+}
+
+.fs-100 {
+    font-size: 100px;
+}
+
+.img-90 {
+    width: 90%;
+}
