@@ -14,12 +14,12 @@ class UserModel extends Model
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
     protected $allowedFields    = [
-        'parent_id',
+        'user_group_id',
         'employee_id',
         'name',
         'email',
         'password',
-        'status'
+        'status',
     ];
 
     // Dates
@@ -45,4 +45,27 @@ class UserModel extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
+    public function getAllUsers()
+    {
+        $usersUserGroupTable = $this->builder();
+        $usersUserGroupTable->select('*, users.name AS name, users_group.name AS user_group_name');
+        $usersUserGroupTable->join('users_group', 'users.user_group_id = users_group.user_group_id', 'left');
+        return $usersUserGroupTable->get()->getResultArray();
+    }
+
+    public function getUsers(string $userId)
+    {
+        return $this->find($userId);
+    }
+
+    public function getUserByEmployeeId(string $employeeId)
+    {
+        return $this->where('employee_id', $employeeId)->first();
+    }
+
+    public function updateUser(int $id, array $data)
+    {
+        return $this->update($id, $data);
+    }
 }

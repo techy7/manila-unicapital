@@ -7,36 +7,33 @@ use App\Models\UserModel;
 
 class Login extends BaseController
 {
-    private $lang;
+    private $login_lang;
 
     public function __construct()
     {
         $locale = service('request')->getLocale();
-        $this->lang = include(APPPATH . '/Language/' . $locale . '/Login.php');
+        $this->login_lang = include(APPPATH . '/Language/' . $locale . '/Login.php');
     }
 
     public function index()
     {
-        session();
-        session_destroy();
-        
+        $this->session->destroy();
         helper(['form']);
-        echo view('login');
+        return view('login');
     }
 
     public function loginAuth()
     {
-        $session = session();
         $userModel = new UserModel();
-        $employee_id = $this->request->getVar('employee_id');
-        $password = $this->request->getVar('password');
+        $employee_id = $this->request->getPost('employee_id');
+        $password = $this->request->getPost('password');
         
         $user_data = $userModel->where('employee_id', $employee_id)->first();
         
         if ($user_data && $user_data['status']) {
             $authenticatePassword = password_verify($password, $user_data['password']);
             if ($authenticatePassword) {
-                $session->set([
+                $this->session->set([
                     'user_id' => $user_data['id'],
                     'employee_id' => $user_data['employee_id'],
                     'isLoggedIn' => true
@@ -44,20 +41,29 @@ class Login extends BaseController
                 return redirect()->to('/dashboard');
             }
             else {
-                $session->setFlashdata('login_error_message', $this->lang['errorMessage']['forPassword']);
+                $this->session->setFlashdata('login_error_message', $this->login_lang['errorMessage']['forPassword']);
                 return redirect()->to('/login');
             }
         }
         else {
-            $session->setFlashdata('login_error_message', $this->lang['errorMessage']['forEmployeeId']);
+            $this->session->setFlashdata('login_error_message', $this->login_lang['errorMessage']['forEmployeeId']);
             return redirect()->to('/login');
         }
     }
 
     public function logoutAuth()
     {
-        session();
-        session_destroy();
+        $this->session->destroy();
         return redirect()->to('/');
+    }
+
+    public function checkAuth()
+    {
+        if ($this->session->get('isLoggedIn')) {
+            return redirect()->to('/dashboard');
+        }
+        else {
+            return redirect()->to('/login');
+        }
     }
 }

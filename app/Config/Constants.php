@@ -98,3 +98,5 @@ define('EVENT_PRIORITY_HIGH', 10);
  */
 define('SITE_NAME', 'Manila Unicapital');
 define('SITE_VERSION', 'v01.01 202305');
+
+define('PERMISSION_LIST', []);

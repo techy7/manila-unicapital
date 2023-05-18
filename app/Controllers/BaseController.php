@@ -8,6 +8,7 @@ use CodeIgniter\HTTP\IncomingRequest;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 use Psr\Log\LoggerInterface;
+use App\Modules\Breadcrumbs\Breadcrumbs;
 
 /**
  * Class BaseController
@@ -41,7 +42,11 @@ abstract class BaseController extends Controller
      * Be sure to declare properties for any property fetch you initialized.
      * The creation of dynamic property is deprecated in PHP 8.2.
      */
-    // protected $session;
+    protected $session;
+
+    public $lang;
+    public $breadcrumbs;
+    public $view_data;
 
     /**
      * Constructor.
@@ -53,6 +58,28 @@ abstract class BaseController extends Controller
 
         // Preload any models, libraries, etc, here.
 
-        // E.g.: $this->session = \Config\Services::session();
+        // Load Session and Authentication Data
+        $this->session = \Config\Services::session();
+
+        if ($this->session->isLoggedIn) {
+            $userModel = model('UserModel');
+            $user_data = $userModel->getUsers($this->session->user_id);
+
+            $this->view_data['session_data'] = [
+                'user_id' => $this->session->user_id,
+                'employee_id' => $this->session->employee_id,
+                'name' => $user_data['name'],
+                'email' => $user_data['email'],
+                'status' => $user_data['status'],
+            ];
+        }
+
+        // Load Language Default
+        $this->lang = include(APPPATH . '/Language/' .  $this->request->getLocale() . '/Default.php');
+        
+        // Load Breadcrumbs
+        $breadcrumbInit = new Breadcrumbs();
+        $this->breadcrumbs = $breadcrumbInit->buildAuto();
+        $this->view_data['breadcrumbs'] = $this->breadcrumbs;
     }
 }

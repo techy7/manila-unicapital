@@ -17,8 +17,7 @@
         $('#start-date, #end-date').datepicker();
 
         $("#form-login").validate();
-        $("#form-project").validate();
-        $("#form-work").validate();
+        $("#form-add-edit").validate();
     });
 
 })(window.jQuery);

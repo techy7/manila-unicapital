@@ -11,7 +11,7 @@ $routes = Services::routes();
  * --------------------------------------------------------------------
  */
 $routes->setDefaultNamespace('App\Controllers');
-$routes->setDefaultController('Home');
+$routes->setDefaultController('Dashboard');
 $routes->setDefaultMethod('index');
 $routes->setTranslateURIDashes(false);
 $routes->set404Override();
@@ -29,12 +29,30 @@ $routes->set404Override();
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-#$routes->get('/', 'Login::index');
+$routes->get('/sysinfo', 'SystemInfo::index');
+
+$routes->get('/', 'Login::checkAuth');
 $routes->get('/login', 'Login::index');
 $routes->post('/login', 'Login::loginAuth');
 $routes->get('/logout', 'Login::logoutAuth');
 
-$routes->get('/dashboard', 'Dashboard::index', ['filter' => 'authGuard']);
+$routes->group('', ['filter' => 'authGuard'], static function ($routes) {
+    $routes->get('dashboard', 'Dashboard::index');
+    // Users
+    $routes->get('users', 'Users::index');
+    $routes->get('users/(:num)', 'Users::viewUser/$1');
+    $routes->group('users', static function ($routes) {
+        $routes->get('add', 'Users::addUser');
+        $routes->get('edit/(:num)', 'Users::editUser/$1');
+        $routes->post('save', 'Users::updateUser');
+        
+        $routes->get('groups', 'Users::index');
+        $routes->get('group_permissions', 'Users::index');
+    });
+
+    // Deadlink Redirects
+    $routes->addRedirect('users/edit', 'users');
+});
 
 
 
