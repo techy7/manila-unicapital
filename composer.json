@@ -6,6 +6,7 @@
     "license": "MIT",
     "require": {
         "php": "^7.4 || ^8.0",
+        "amol/reactiveci4": "^1.0",
         "codeigniter4/framework": "^4.0",
         "geeklabs/ci4-breadcrumbs": "^2.0"
     },

@@ -35,12 +35,12 @@
                     <tbody>
                     <?php if ($users): ?>
                         <?php foreach ($users as $user): ?>
-                        <tr data-target="<?php echo base_url('users/' . $user['employee_id']); ?>">
-                            <td class="v-align-middle semi-bold"><?= esc($user['employee_id']); ?></td>
-                            <td class="v-align-middle"><?= esc($user['user_group_name']); ?></td>
-                            <td class="v-align-middle"><?= esc($user['name']); ?></td>
-                            <td class="v-align-middle"><?= esc($user['email']); ?></td>
-                            <td class="v-align-middle"><?php echo $user['status'] ? lang('Users.userLabels.active') : lang('Users.userLabels.inactive'); ?></td>
+                        <tr data-target="<?php echo base_url('users/' . $user->employee_id); ?>">
+                            <td class="v-align-middle semi-bold"><?= esc($user->employee_id); ?></td>
+                            <td class="v-align-middle"><?= esc($user->user_group_name); ?></td>
+                            <td class="v-align-middle"><?= esc($user->name); ?></td>
+                            <td class="v-align-middle"><?= esc($user->email); ?></td>
+                            <td class="v-align-middle"><?php echo $user->status ? lang('Users.userLabels.active') : lang('Users.userLabels.inactive'); ?></td>
                         </tr>
                         <?php endforeach; ?>
                     <?php endif; ?>

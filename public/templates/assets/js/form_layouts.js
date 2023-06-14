@@ -16,6 +16,9 @@
 
         $('#start-date, #end-date').datepicker();
 
+        $("#employee_id").mask("99999999");
+        $("#passcode").mask("999999");
+        
         $("#form-login").validate();
         $("#form-add-edit").validate();
     });

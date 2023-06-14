@@ -9,6 +9,7 @@ use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 use Psr\Log\LoggerInterface;
 use App\Modules\Breadcrumbs\Breadcrumbs;
+use Amol\ReactiveCi4\Reactive;
 
 /**
  * Class BaseController
@@ -46,7 +47,9 @@ abstract class BaseController extends Controller
 
     public $lang;
     public $breadcrumbs;
+    public $activity;
     public $view_data;
+    public $admin_user_data;
 
     /**
      * Constructor.
@@ -61,16 +64,15 @@ abstract class BaseController extends Controller
         // Load Session and Authentication Data
         $this->session = \Config\Services::session();
 
-        if ($this->session->isLoggedIn) {
-            $userModel = model('UserModel');
-            $user_data = $userModel->getUsers($this->session->user_id);
+        if (isset($this->session->isLoggedIn)) {
+            $this->admin_user_data = model('UserModel')->find($this->session->user_id);
 
             $this->view_data['session_data'] = [
                 'user_id' => $this->session->user_id,
                 'employee_id' => $this->session->employee_id,
-                'name' => $user_data['name'],
-                'email' => $user_data['email'],
-                'status' => $user_data['status'],
+                'name' => $this->admin_user_data->name,
+                'email' => $this->admin_user_data->email,
+                'status' => $this->admin_user_data->status,
             ];
         }
 
@@ -78,8 +80,11 @@ abstract class BaseController extends Controller
         $this->lang = include(APPPATH . '/Language/' .  $this->request->getLocale() . '/Default.php');
         
         // Load Breadcrumbs
-        $breadcrumbInit = new Breadcrumbs();
-        $this->breadcrumbs = $breadcrumbInit->buildAuto();
+        $BreadcrumbsInit = new Breadcrumbs();
+        $this->breadcrumbs = $BreadcrumbsInit->buildAuto();
         $this->view_data['breadcrumbs'] = $this->breadcrumbs;
+
+        // Load Reactive
+        $this->activity = new Reactive();
     }
 }

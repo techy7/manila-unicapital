@@ -2,15 +2,15 @@
 return [
     'fieldLabel' => [
         'employeeId' => 'Employee ID',
-        'password' => 'Password',
+        'passcode' => 'Passcode',
         'accessLogin' => 'Access Login',
     ],
     'fieldPlaceholder' => [
         'forEmployeeId' => 'Your Employee ID',
-        'forPassword' => 'Minimum of 4 characters.',
+        'forPasscode' => 'Your Passcode',
     ],
     'errorMessage' => [
         'forEmployeeId' => 'Employee ID doesn\'t exist',
-        'forPassword' => 'Incorrect Password',
+        'forPasscode' => 'Incorrect Passcode',
     ],
 ];

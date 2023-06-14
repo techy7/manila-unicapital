@@ -38,6 +38,7 @@ $routes->get('/logout', 'Login::logoutAuth');
 
 $routes->group('', ['filter' => 'authGuard'], static function ($routes) {
     $routes->get('dashboard', 'Dashboard::index');
+
     // Users
     $routes->get('users', 'Users::index');
     $routes->get('users/(:num)', 'Users::viewUser/$1');
@@ -48,6 +49,14 @@ $routes->group('', ['filter' => 'authGuard'], static function ($routes) {
         
         $routes->get('groups', 'Users::index');
         $routes->get('group_permissions', 'Users::index');
+    });
+
+    // Profile
+    $routes->get('profile', 'Profile::index');
+    $routes->group('profile', static function ($routes) {
+        $routes->get('edit', 'Profile::edit');
+        $routes->post('save', 'Profile::update');
+        $routes->get('activity', 'Profile::activity');
     });
 
     // Deadlink Redirects

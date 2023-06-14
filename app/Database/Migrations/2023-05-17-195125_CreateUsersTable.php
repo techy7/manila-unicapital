@@ -12,8 +12,7 @@ class CreateUsersTable extends Migration
         $this->forge->addField([
             'id' => [
                 'type' => 'INT',
-                'usigned' => true,
-                'constraint' => 5,
+                'constraint' => 10,
                 'unsigned' => true,
                 'auto_increment' => true
             ],
@@ -22,17 +21,17 @@ class CreateUsersTable extends Migration
             ],
             'employee_id' => [
                 'type' => 'VARCHAR',
-                'constraint' => 200
+                'constraint' => 8,
+            ],
+            'passcode' => [
+                'type' => 'VARCHAR',
+                'constraint' => 255
             ],
             'name' => [
                 'type' => 'VARCHAR',
                 'constraint' => 200
             ],
             'email' => [
-                'type' => 'VARCHAR',
-                'constraint' => 200
-            ],
-            'password' => [
                 'type' => 'VARCHAR',
                 'constraint' => 200
             ],

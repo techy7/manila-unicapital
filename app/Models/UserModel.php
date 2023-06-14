@@ -10,7 +10,7 @@ class UserModel extends Model
     protected $table            = 'users';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
-    protected $returnType       = 'array';
+    protected $returnType       = 'object';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
     protected $allowedFields    = [
@@ -51,7 +51,7 @@ class UserModel extends Model
         $usersUserGroupTable = $this->builder();
         $usersUserGroupTable->select('*, users.name AS name, users_group.name AS user_group_name');
         $usersUserGroupTable->join('users_group', 'users.user_group_id = users_group.user_group_id', 'left');
-        return $usersUserGroupTable->get()->getResultArray();
+        return $usersUserGroupTable->get()->getResult();
     }
 
     public function getUsers(string $userId)

@@ -68,7 +68,6 @@
                             </ul>
                         </li>
                     </ul>
-                    <a href="#" class="search-link d-flex justify-content-between align-items-center d-lg-none" data-toggle="search"><?php echo lang('Default.searchPlaceholder'); ?> <i class="pg-search float-right"></i></a>
                 </div>
             </div>
         </div>

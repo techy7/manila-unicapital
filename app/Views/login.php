@@ -24,6 +24,7 @@
                                     'type' => 'text',
                                     'class' => 'form-control',
                                     'name' => 'employee_id',
+                                    'id' => 'employee_id',
                                     'placeholder' => lang('Login.fieldPlaceholder.forEmployeeId'),
                                     'required' => true
                                 ]); ?>
@@ -33,11 +34,12 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group form-group-default">
-                                <label><?php echo lang('Login.fieldLabel.password'); ?></label>
+                                <label><?php echo lang('Login.fieldLabel.passcode'); ?></label>
                                 <?php echo form_password([
                                     'class' => 'form-control',
-                                    'name' => 'password',
-                                    'placeholder' => lang('Login.fieldPlaceholder.forPassword'),
+                                    'name' => 'passcode',
+                                    'id' => 'passcode',
+                                    'placeholder' => lang('Login.fieldPlaceholder.forPasscode'),
                                     'required' => true
                                 ]); ?>
                             </div>
@@ -66,8 +68,10 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('page-require-scripts') ?>
+<script src="<?php echo base_url('templates/assets/plugins/jquery-inputmask/jquery.inputmask.min.js'); ?>" type="text/javascript"></script>
 <script src="<?php echo base_url('templates/assets/plugins/jquery-validation/js/jquery.validate.min.js'); ?>" type="text/javascript"></script>
 <script src="<?php echo base_url('templates/assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js'); ?>" type="text/javascript"></script>
+
 <?= $this->endSection() ?>
 
 <?= $this->section('page-scripts') ?>

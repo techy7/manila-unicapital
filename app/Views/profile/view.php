@@ -9,7 +9,7 @@
         <div class="card card-transparent">
             <div class="card-header">
                 <div class="card-title">
-                    <h2 class="m-t-0 m-b-0"><?php echo lang('Users.users'); ?></h2>
+                    <h2 class="m-t-0 m-b-0"><?php echo lang('Profile.profile'); ?></h2>
                 </div>
             </div>
             <div class="card-body">
@@ -17,16 +17,15 @@
                     <div class="col-lg-6">
                         <div class="card">
                             <div class="card-header separator">
-                                <div class="card-title"><?php echo lang('Users.userDetails'); ?></div>
+                                <div class="card-title"><?php echo lang('Profile.profileDetails'); ?></div>
                             </div>
                             <div class="card-body">
                                 <h3><?php echo $user_data->name; ?></h3>
-                                <p><?php echo lang('Users.userLabels.employeeId'); ?>: <?php echo $user_data->employee_id; ?></p>
-                                <p><?php echo lang('Users.userLabels.email'); ?>: <?php echo mailto($user_data->email); ?></p>
-                                <p><?php echo lang('Users.userLabels.status'); ?>: <?php echo $user_data->status ? lang('Users.userLabels.active') : lang('Users.userLabels.inactive'); ?></p>
+                                <p><?php echo lang('Profile.profileLabels.employeeId'); ?>: <?php echo $user_data->employee_id; ?></p>
+                                <p><?php echo lang('Profile.profileLabels.email'); ?>: <?php echo mailto($user_data->email); ?></p>
                             </div>
                             <div class="card-footer text-right">
-                                <a href="<?php echo base_url('users/edit/' . $user_data->id); ?>" class="btn btn-primary btn-cons"><span>Edit User</span></a>
+                                <a href="<?php echo base_url('profile/edit'); ?>" class="btn btn-primary btn-cons pull-right"><span><?php echo lang('Profile.editProfile'); ?></span></a>
                             </div>
                         </div>
                     </div>

@@ -28,7 +28,7 @@ class Users extends BaseController
     public function addUser()
     {
         helper(['form']);
-        return view('users/add');
+        return view('users/add', $this->view_data);
     }
 
     public function editUser(int $userId)

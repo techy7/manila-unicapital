@@ -12,8 +12,7 @@ class CreateUsersGroupTable extends Migration
         $this->forge->addField([
             'user_group_id' => [
                 'type' => 'INT',
-                'usigned' => true,
-                'constraint' => 5,
+                'constraint' => 10,
                 'unsigned' => true,
                 'auto_increment' => true
             ],

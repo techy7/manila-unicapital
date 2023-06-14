@@ -10,10 +10,10 @@ class SuperAdmin extends Seeder
     {
         $data = [
             'user_group_id' => 1,
-            'employee_id' => '0000',
+            'employee_id' => '12345678',
             'name' => 'Super Admin',
             'email' => 'arwin.abatayo@techy7.com',
-            'password' => password_hash('admin123', PASSWORD_BCRYPT),
+            'passcode' => password_hash('123456', PASSWORD_BCRYPT),
         ];
 
         $this->db->table('users')->insert($data);
